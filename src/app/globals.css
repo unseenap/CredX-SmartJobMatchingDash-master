@@ -1,0 +1,164 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --font-sans: var(--font-sans);
+  --font-heading: var(--font-heading);
+  --font-mono: var(--font-mono);
+  --radius-sm: 0.5rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+  --radius-3xl: 1.5rem;
+}
+
+:root {
+  color-scheme: light;
+  --background: oklch(0.982 0.006 240);
+  --foreground: oklch(0.205 0.018 245);
+  --card: oklch(0.998 0.002 240);
+  --card-foreground: oklch(0.205 0.018 245);
+  --primary: oklch(0.62 0.18 35);
+  --primary-foreground: oklch(0.985 0.006 55);
+  --secondary: oklch(0.94 0.01 240);
+  --secondary-foreground: oklch(0.29 0.02 245);
+  --muted: oklch(0.952 0.008 240);
+  --muted-foreground: oklch(0.48 0.025 245);
+  --accent: oklch(0.92 0.045 35);
+  --accent-foreground: oklch(0.35 0.09 32);
+  --destructive: oklch(0.57 0.21 25);
+  --border: oklch(0.88 0.014 240);
+  --input: oklch(0.86 0.016 240);
+  --ring: oklch(0.62 0.18 35);
+  --success: oklch(0.46 0.12 155);
+  --success-soft: oklch(0.94 0.04 155);
+}
+
+.dark {
+  color-scheme: dark;
+  --background: oklch(0.155 0.018 248);
+  --foreground: oklch(0.94 0.012 238);
+  --card: oklch(0.195 0.019 248);
+  --card-foreground: oklch(0.94 0.012 238);
+  --primary: oklch(0.69 0.17 35);
+  --primary-foreground: oklch(0.985 0.008 55);
+  --secondary: oklch(0.235 0.02 247);
+  --secondary-foreground: oklch(0.9 0.012 238);
+  --muted: oklch(0.225 0.018 248);
+  --muted-foreground: oklch(0.7 0.024 240);
+  --accent: oklch(0.255 0.055 32);
+  --accent-foreground: oklch(0.9 0.055 35);
+  --destructive: oklch(0.68 0.19 25);
+  --border: oklch(0.3 0.022 246);
+  --input: oklch(0.34 0.024 246);
+  --ring: oklch(0.69 0.17 35);
+  --success: oklch(0.7 0.13 155);
+  --success-soft: oklch(0.235 0.045 155);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply scroll-smooth font-sans;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    text-rendering: optimizeLegibility;
+    transition: background-color 180ms ease, color 180ms ease;
+  }
+
+  .dark body {
+    background-image:
+      radial-gradient(circle at 88% 2%, color-mix(in oklab, var(--primary) 9%, transparent) 0, transparent 30rem),
+      linear-gradient(to bottom, color-mix(in oklab, var(--card) 30%, transparent), transparent 22rem);
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--primary) 24%, transparent);
+  }
+
+  button,
+  a,
+  input,
+  select,
+  textarea {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+}
+
+@layer components {
+  .app-container {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .surface {
+    @apply rounded-2xl border border-border bg-card shadow-[0_18px_45px_-32px_rgba(27,39,52,0.35)];
+  }
+
+  .field {
+    @apply h-11 w-full rounded-lg border border-input bg-card px-3.5 text-sm text-foreground placeholder:text-muted-foreground transition-colors hover:border-foreground/25 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .field-area {
+    @apply min-h-32 w-full resize-y rounded-lg border border-input bg-card px-3.5 py-3 text-sm text-foreground placeholder:text-muted-foreground transition-colors hover:border-foreground/25 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .label {
+    @apply text-sm font-semibold text-foreground;
+  }
+
+  .helper {
+    @apply text-xs leading-5 text-muted-foreground;
+  }
+
+  .eyebrow {
+    @apply text-xs font-bold uppercase tracking-[0.16em] text-primary;
+  }
+
+  .skeleton {
+    @apply animate-pulse rounded-lg bg-muted;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
