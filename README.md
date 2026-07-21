@@ -1,139 +1,176 @@
 <div align="center">
-  <img src="public/brand/credx-mark.png" alt="CredX logo" width="96" />
 
-  # CredX — Smart Job Matching Dashboard
+<img src="public/brand/credx-mark.png" alt="CredX" width="100" />
 
-  **Ranked opportunities. Visible reasons. Better career decisions.**
+# CredX — Smart Job Matching Dashboard
 
-  CredX is a full-stack, explainable job and internship matching platform that turns a student's skills, GPA, and work-authorization status into ranked recommendations—and shows exactly why every role matched.
+### Ranked opportunities. Visible reasons. Better career decisions.
 
-  [View the live application](https://cred-x-smart-job-matching-dash.vercel.app/) · [See the presentation](#project-presentation) · [Explore the product](#product-walkthrough) · [Understand the algorithm](#how-the-matching-engine-works) · [Run locally](#run-credx-locally)
+CredX is a full-stack, explainable job and internship matching platform that turns a student's skills, GPA, and work-authorization status into ranked recommendations — and shows exactly *why* every role matched.
 
-  [![Open CredX](https://img.shields.io/badge/OPEN_LIVE_PROJECT-E4512F?style=for-the-badge&logo=vercel&logoColor=white)](https://cred-x-smart-job-matching-dash.vercel.app/)
+<br />
 
-  ![Next.js](https://img.shields.io/badge/Next.js_16-111827?style=flat-square&logo=next.js&logoColor=white)
-  ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
-  ![MongoDB](https://img.shields.io/badge/MongoDB-00684A?style=flat-square&logo=mongodb&logoColor=white)
-  ![Groq](https://img.shields.io/badge/Groq-AI_resume_analysis-E4512F?style=flat-square)
-  ![Vitest](https://img.shields.io/badge/Vitest-tested-6E9F18?style=flat-square&logo=vitest&logoColor=white)
+[![Live App](https://img.shields.io/badge/▶%20Open%20Live%20App-E4512F?style=for-the-badge&logoColor=white)](https://cred-x-smart-job-matching-dash.vercel.app/)
+[![Presentation](https://img.shields.io/badge/📊%20View%20Presentation-1a1a2e?style=for-the-badge)](https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fraw.githubusercontent.com%2FEren2yeager%2FCredX-SmartJobMatchingDash%2Fmaster%2Foutput%2FCredX_Project_Presentation.pptx)
+
+<br />
+
+![Next.js](https://img.shields.io/badge/Next.js_16-000000?style=flat-square&logo=next.js&logoColor=white)
+![React](https://img.shields.io/badge/React_19-61DAFB?style=flat-square&logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-00684A?style=flat-square&logo=mongodb&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS_4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)
+![Groq](https://img.shields.io/badge/Groq_AI-E4512F?style=flat-square&logoColor=white)
+![Vitest](https://img.shields.io/badge/Vitest-6E9F18?style=flat-square&logo=vitest&logoColor=white)
+![Vercel](https://img.shields.io/badge/Deployed_on_Vercel-000000?style=flat-square&logo=vercel&logoColor=white)
+
 </div>
 
-![CredX student-to-opportunity matching illustration](public/images/credx-matching-hero.png)
+<br />
 
-## Why CredX exists
+![CredX Hero](public/images/credx-matching-hero.png)
 
-Traditional job boards return filtered lists. Students still have to guess which roles fit, why they fit, and whether constraints such as GPA or sponsorship will disqualify them later.
+<br />
 
-CredX replaces that uncertainty with a transparent recommendation loop:
+---
 
-1. A student creates a structured profile or uploads a resume.
-2. CredX compares the profile with every available role.
-3. A deterministic scoring engine ranks the opportunities.
-4. Every result includes the evidence behind its score.
-5. Students apply and track progress while recruiters manage the same pipeline.
+## 📌 Table of Contents
 
-> **Core product decision:** matching logic is intentionally rule-based and explainable. A judge, student, or recruiter can reproduce the score instead of trusting an opaque black box.
+- [Why CredX](#-why-credx)
+- [Live Deployment](#-live-deployment)
+- [Product Walkthrough](#-product-walkthrough)
+- [Matching Engine](#-how-the-matching-engine-works)
+- [System Architecture](#-system-architecture)
+- [Tech Stack](#-tech-stack)
+- [Project Structure](#-project-structure)
+- [API Surface](#-api-surface)
+- [Run Locally](#-run-credx-locally)
+- [Evaluation Criteria](#-evaluation-criteria-covered)
+- [Presentation](#-project-presentation)
 
-## Live deployment
+---
 
-CredX is deployed on Vercel and available for evaluation:
+## 💡 Why CredX
 
-### **[Launch CredX →](https://cred-x-smart-job-matching-dash.vercel.app/)**
+Traditional job boards return filtered lists. Students still have to *guess* which roles fit, why they fit, and whether constraints like GPA or sponsorship will disqualify them later.
 
-The deployed application demonstrates the responsive landing page, Google authentication flow, student matching experience, application tracking, and recruiter workspace described below.
+CredX replaces that uncertainty with a **transparent recommendation loop:**
 
-## Evaluation criteria, covered
+```
+1. Student creates a structured profile or uploads a resume
+2. CredX compares the profile against every available role
+3. A deterministic scoring engine ranks all opportunities
+4. Every result shows the evidence behind its score
+5. Students apply and track progress — recruiters manage the same pipeline
+```
 
-| What evaluators look for | How CredX demonstrates it |
-| --- | --- |
-| Sensible match-score logic | Weighted skills, GPA, and work-authorization signals with an explicit incompatibility cap |
-| End-to-end functionality | Profile creation → resume analysis → ranked matches → application → recruiter status update |
-| Clear recommendations | Percentage score, matched skills, GPA fit, and work-auth compatibility are visible per role |
-| Useful filters | Location, work mode, and sponsorship filters refine an already-ranked result set |
-| Code and API quality | Typed domain modules, service boundaries, REST route handlers, reusable UI components, and unit-tested scoring |
-| Stretch functionality | Resume intelligence, application tracking, recruiter workspace, explain-the-match details, sorting by score |
+> **Core product decision:** matching logic is intentionally rule-based and explainable. A judge, student, or recruiter can reproduce any score instead of trusting an opaque black box.
 
-## Product walkthrough
+---
 
-### Student experience
+## 🚀 Live Deployment
 
-- **Google sign-in** with a purpose-built authentication and sign-out flow.
-- **Structured profile creation** for tagged skills, GPA, preferred location, and work authorization.
-- **Resume intelligence** for PDF, DOCX, PNG, JPEG, and WebP files up to 5 MB.
-- **Ranked match dashboard** with transparent score breakdowns.
-- **Search and filters** for location, remote/hybrid/onsite work, and sponsorship.
-- **Job detail and application flow** with duplicate-application protection.
-- **Application tracker** for submitted, under-review, accepted, and rejected states.
+CredX is deployed on Vercel and ready for evaluation:
 
-### Recruiter experience
+<div align="center">
 
-- **Recruiter dashboard** summarizing listings and applicant activity.
-- **Structured role creation** with required skills, minimum GPA, location, work mode, and sponsorship.
-- **Listing management** for active opportunities.
-- **Applicant pipeline** with student context and calculated match scores.
-- **Status management** that immediately updates the student's tracker.
+### **[🔗 Launch CredX →](https://cred-x-smart-job-matching-dash.vercel.app/)**
 
-### Resume intelligence pipeline
+*Demonstrates: responsive landing page · Google OAuth · student matching · application tracking · recruiter workspace*
 
-CredX validates the real file signature—not only the filename—then chooses the appropriate extraction path:
+</div>
 
-| Format | Extraction method |
-| --- | --- |
+---
+
+## 🖥️ Product Walkthrough
+
+### 👩‍🎓 Student Experience
+
+| Feature | Description |
+|---|---|
+| 🔐 Google Sign-In | Purpose-built authentication and sign-out flow |
+| 📋 Profile Builder | Tagged skills, GPA, preferred location, work authorization |
+| 📄 Resume Intelligence | Upload PDF, DOCX, PNG, JPEG, or WebP (up to 5 MB) |
+| 🎯 Ranked Matches | Score-ranked opportunities with transparent breakdowns |
+| 🔍 Search & Filters | Filter by location, work mode (remote/hybrid/onsite), sponsorship |
+| 📝 Apply | One-click application with duplicate-application protection |
+| 📊 Application Tracker | Track submitted → under review → accepted / rejected |
+
+### 🏢 Recruiter Experience
+
+| Feature | Description |
+|---|---|
+| 📈 Dashboard | Summary of listings and applicant activity |
+| ➕ Role Creation | Skills required, min GPA, location, work mode, sponsorship |
+| 📂 Listing Management | View and manage all active opportunities |
+| 👥 Applicant Pipeline | Student context + calculated match scores per applicant |
+| ✅ Status Management | Update status — instantly reflected in the student tracker |
+
+### 🧠 Resume Intelligence Pipeline
+
+CredX validates the real file signature — not just the filename — before processing:
+
+| Format | Extraction Method |
+|---|---|
 | PDF | `pdf-parse` text extraction |
 | DOCX | `mammoth` raw-text extraction |
 | PNG / JPEG / WebP | Tesseract OCR |
 
-Extracted text is sent to Groq with structured JSON output and `temperature: 0`. The service attempts a primary model and a fallback model, normalizes and deduplicates skills, and limits the result to 50 suggestions. If AI analysis is temporarily unavailable, the resume remains stored and the UI reports the partial success clearly.
+Extracted text is sent to **Groq** with structured JSON output at `temperature: 0`. The service attempts a primary model with a fallback, normalizes and deduplicates skills, and caps results at 50 suggestions. If AI analysis is temporarily unavailable, the resume is still stored and the UI reports partial success clearly.
 
-## How the matching engine works
+---
 
-CredX calculates three independent signals and combines them into a score from 0–100.
+## ⚙️ How the Matching Engine Works
 
-```text
-Final score = (Skill overlap × 0.60)
-            + (GPA fit       × 0.25)
-            + (Work auth     × 0.15)
+CredX calculates three independent signals and combines them into a score from **0–100**:
+
+```
+Final Score = (Skill Overlap × 0.60)
+            + (GPA Fit       × 0.25)
+            + (Work Auth     × 0.15)
 ```
 
-### 1. Skill overlap — 60%
+### 1️⃣ Skill Overlap — 60%
 
-Skills use Jaccard similarity so the score rewards shared skills without ignoring missing requirements:
+Uses **Jaccard similarity** to reward shared skills without hiding missing requirements:
 
-```text
-Skill score = |student skills ∩ required skills|
-              ────────────────────────────────── × 100
+```
+Skill Score =    |student skills ∩ required skills|
+              ──────────────────────────────────────  × 100
               |student skills ∪ required skills|
 ```
 
-### 2. GPA fit — 25%
+### 2️⃣ GPA Fit — 25%
 
-- At or above the role's minimum GPA: **100 points**.
-- Below the threshold: a linear decay across one GPA point.
-- More than one point below: **0 points** for this signal.
+- **At or above** minimum GPA → `100 pts`
+- **Below by ≤ 1 point** → linear decay
+- **Below by > 1 point** → `0 pts`
 
-### 3. Work authorization — 15%
+### 3️⃣ Work Authorization — 15%
 
-- Compatible authorization: **100 points**.
-- Sponsorship required but not offered: **0 points**.
-- Incompatible results are capped at **20 overall**, preventing an otherwise strong skill match from hiding a critical constraint while keeping the near-match visible.
+- Compatible → `100 pts`
+- Sponsorship required but not offered → `0 pts`
+- Incompatible results are **capped at 20 overall**, keeping near-matches visible without hiding critical blockers
 
-### Worked example
+### 📐 Worked Example
 
 | Signal | Result | Weight | Contribution |
-| --- | ---: | ---: | ---: |
-| Skill overlap | 80 | 60% | 48 |
-| GPA fit | 100 | 25% | 25 |
-| Work authorization | Compatible | 15% | 15 |
-| **Final match** |  |  | **88%** |
+|---|---:|---:|---:|
+| Skill Overlap | 80 | 60% | 48 |
+| GPA Fit | 100 | 25% | 25 |
+| Work Authorization | ✅ Compatible | 15% | 15 |
+| **Final Match Score** | | | **88 / 100** |
 
-The response also carries `matchedSkills`, `skillScore`, `gpaScore`, and `workAuthCompatible`, allowing the interface to explain the recommendation rather than displaying a number alone.
+Each response also carries `matchedSkills`, `skillScore`, `gpaScore`, and `workAuthCompatible` — so the UI explains the recommendation rather than just showing a number.
 
-## System architecture
+---
+
+## 🏗️ System Architecture
 
 ```mermaid
 flowchart LR
     U[Student / Recruiter] --> UI[Next.js App Router UI]
-    UI --> AUTH[Google OAuth via NextAuth]
+    UI --> AUTH[Google OAuth · NextAuth]
     UI --> API[Next.js Route Handlers]
 
     API --> PROFILE[Profile Service]
@@ -148,39 +185,86 @@ flowchart LR
     APP --> DB
 
     MATCH --> SCORE[Deterministic Score Engine]
-    RESUME --> EXTRACT[PDF / DOCX / OCR extraction]
-    EXTRACT --> GROQ[Groq skill analysis]
-    RESUME --> CLOUD[Cloudinary storage]
+    RESUME --> EXTRACT[PDF / DOCX / OCR Extraction]
+    EXTRACT --> GROQ[Groq Skill Analysis]
+    RESUME --> CLOUD[Cloudinary Storage]
 ```
 
-The application is a **single full-stack Next.js project**: React Server Components and client components provide the frontend, while route handlers and domain services provide the backend.
+> A **single full-stack Next.js project** — React Server Components handle the frontend; route handlers and domain services handle the backend.
 
-## Technology choices
+---
 
-| Layer | Technology | Why it is used |
-| --- | --- | --- |
-| Full-stack framework | Next.js 16, React 19 | App Router, server rendering, route handlers, and unified deployment |
-| Language | TypeScript | Typed contracts across UI, APIs, services, and models |
-| Styling | Tailwind CSS 4, shadcn/ui | Consistent, reusable, responsive interface system |
-| Authentication | NextAuth.js + Google OAuth | Secure session-based user onboarding |
-| Database | MongoDB + Mongoose | Flexible documents for profiles, listings, matches, and applications |
-| Resume processing | pdf-parse, Mammoth, Tesseract.js | Native support for PDF, DOCX, and image resumes |
-| AI analysis | Groq SDK | Fast structured extraction of skills from resume text |
-| File storage | Cloudinary | Persistent resume storage |
+## 🛠️ Tech Stack
+
+| Layer | Technology | Purpose |
+|---|---|---|
+| Framework | Next.js 16 + React 19 | App Router, SSR, route handlers, unified deploy |
+| Language | TypeScript | Typed contracts across UI, APIs, services, models |
+| Styling | Tailwind CSS 4 + shadcn/ui | Consistent, reusable, responsive component system |
+| Auth | NextAuth.js + Google OAuth | Secure session-based user onboarding |
+| Database | MongoDB + Mongoose | Flexible documents for profiles, listings, matches |
+| Resume | pdf-parse + Mammoth + Tesseract.js | Native PDF, DOCX, and image resume support |
+| AI Analysis | Groq SDK | Fast structured skill extraction from resume text |
+| File Storage | Cloudinary | Persistent resume storage |
 | Testing | Vitest + fast-check | Unit and property-based verification of matching rules |
+| Animation | GSAP + Motion | Smooth UI transitions and interactions |
 
-## Run CredX locally
+---
+
+## 📁 Project Structure
+
+```
+src/
+├── app/                        # Pages, layouts, API routes
+│   ├── api/                    # Backend route handlers
+│   │   ├── auth/               # NextAuth handler
+│   │   ├── profile/            # Student profile CRUD
+│   │   ├── listings/           # Job listing CRUD
+│   │   ├── match/              # Ranked match results
+│   │   ├── applications/       # Application pipeline
+│   │   └── resume-parse/       # Resume upload + analysis
+│   ├── auth/                   # Sign-in and sign-out pages
+│   ├── student/                # Profile, matches, job details, tracker
+│   └── recruiter/              # Dashboard, listings, applicants
+│
+├── components/                 # Shared UI + product components
+├── lib/                        # Auth, DB, Cloudinary, site config
+│
+└── modules/                    # Domain logic
+    ├── applications/           # Application model + service
+    ├── listings/               # Listing model + service
+    ├── matching/               # Score engine, service, model, tests
+    ├── profile/                # Student profile model + service
+    ├── resume/                 # Validation, extraction, OCR, Groq
+    └── user/                   # User model
+```
+
+---
+
+## 🔌 API Surface
+
+| Endpoint | Methods | Responsibility |
+|---|---|---|
+| `/api/auth/[...nextauth]` | GET, POST | Google sign-in, callback, sign-out, session |
+| `/api/profile` | GET, POST, PATCH | Profile creation and updates |
+| `/api/resume-parse` | POST | Validate, extract, store, and analyze resumes |
+| `/api/listings` | GET, POST | Retrieve/filter listings; create recruiter listings |
+| `/api/match` | GET | Ranked, explainable matches for the signed-in student |
+| `/api/applications` | GET, POST, PATCH | Apply, list, and update application status |
+
+---
+
+## 💻 Run CredX Locally
 
 ### Prerequisites
 
-- Node.js 20+
-- npm
-- MongoDB database
-- Google OAuth credentials
-- Groq API key
-- Cloudinary account
+- **Node.js** 20+
+- **MongoDB** database (local or Atlas)
+- **Google OAuth** credentials
+- **Groq** API key
+- **Cloudinary** account
 
-### 1. Clone and install
+### 1. Clone & Install
 
 ```bash
 git clone https://github.com/eren2yeager/credx-smartjobmatchingdash.git
@@ -188,54 +272,51 @@ cd credx-smartjobmatchingdash
 npm install
 ```
 
-> Install packages once in the repository root—the directory containing `package.json`.
+### 2. Configure Environment
 
-### 2. Configure the environment
-
-Create **`.env` in the repository root**. The seed command explicitly reads this filename.
+Create **`.env`** in the repository root:
 
 ```env
-MONGODB_URI="mongodb_connection_string"
+# Database
+MONGODB_URI="your_mongodb_connection_string"
 
+# Auth
 NEXTAUTH_SECRET="a_long_random_secret"
 NEXTAUTH_URL="http://localhost:3000"
+GOOGLE_CLIENT_ID="your_google_client_id"
+GOOGLE_CLIENT_SECRET="your_google_client_secret"
 
-GOOGLE_CLIENT_ID="google_oauth_client_id"
-GOOGLE_CLIENT_SECRET="google_oauth_client_secret"
+# File storage
+CLOUDINARY_CLOUD_NAME="your_cloudinary_cloud_name"
+CLOUDINARY_API_KEY="your_cloudinary_api_key"
+CLOUDINARY_API_SECRET="your_cloudinary_api_secret"
 
-CLOUDINARY_CLOUD_NAME="cloudinary_cloud_name"
-CLOUDINARY_API_KEY="cloudinary_api_key"
-CLOUDINARY_API_SECRET="cloudinary_api_secret"
+# AI
+GROQ_API_KEY="your_groq_api_key"
 
-GROQ_API_KEY="groq_api_key"
-
-# Use the deployed URL in production for canonical SEO links.
+# Site
 NEXT_PUBLIC_SITE_URL="http://localhost:3000"
 ```
 
-For Google OAuth, add this local callback URL in Google Cloud Console:
+> In Google Cloud Console, add this callback URL: `http://localhost:3000/api/auth/callback/google`
 
-```text
-http://localhost:3000/api/auth/callback/google
-```
-
-### 3. Seed realistic demo roles
+### 3. Seed Demo Data
 
 ```bash
 npm run seed
 ```
 
-The idempotent seed inserts 16 listings across frontend, backend, data, ML, DevOps, cloud, and internship roles. Running it again skips existing title/company pairs.
+Inserts **16 realistic listings** across frontend, backend, data, ML, DevOps, cloud, and internship roles. Idempotent — re-running skips existing entries.
 
-### 4. Start the application
+### 4. Start the App
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3000](http://localhost:3000)
 
-### 5. Verify the project
+### 5. Verify
 
 ```bash
 npm run lint
@@ -243,81 +324,70 @@ npx vitest run
 npm run build
 ```
 
-## Recommended evaluator demo
+---
 
-This sequence demonstrates the complete product in approximately three minutes:
+## ✅ Evaluation Criteria Covered
 
-1. **Landing page** — introduce CredX as explainable matching, not another job filter.
-2. **Sign in** — authenticate with Google.
-3. **Student profile** — add skills, GPA, location, and work authorization; optionally upload a resume.
-4. **Matches** — show score-ranked roles and explain one score using its skill, GPA, and authorization breakdown.
-5. **Filters** — narrow results by work mode, location, or sponsorship without losing ranking quality.
-6. **Apply** — submit an application and open the student application tracker.
-7. **Recruiter workspace** — create/open a listing, review the matched applicant, and change the application status.
-8. **Student tracker** — show the updated status completing the end-to-end loop.
+| Evaluator Looks For | How CredX Demonstrates It |
+|---|---|
+| 🧮 Sensible match-score logic | Weighted skills, GPA, and work-auth signals with an explicit incompatibility cap |
+| 🔁 End-to-end functionality | Profile → resume analysis → ranked matches → apply → recruiter update |
+| 💬 Clear recommendations | Percentage score, matched skills, GPA fit, and work-auth visible per role |
+| 🔧 Useful filters | Location, work mode, and sponsorship filters on a ranked result set |
+| 💻 Code & API quality | Typed domain modules, service boundaries, REST handlers, reusable components |
+| ⭐ Stretch functionality | Resume intelligence, application tracking, recruiter workspace, score explanations |
 
-## API surface
+---
 
-| Endpoint | Methods | Responsibility |
-| --- | --- | --- |
-| `/api/auth/[...nextauth]` | GET, POST | Google sign-in, callback, sign-out, and session handling |
-| `/api/profile` | GET, POST, PATCH | Student profile creation and updates |
-| `/api/resume-parse` | POST | Validate, extract, store, and analyze a resume |
-| `/api/listings` | GET, POST | Retrieve/filter listings and create recruiter listings |
-| `/api/match` | GET | Return ranked, explainable matches for the signed-in student |
-| `/api/applications` | GET, POST, PATCH | Apply, list applications, and update pipeline status |
+## 🎯 Recommended Demo Flow (~3 minutes)
 
-## Project structure
-
-```text
-src/
-├── app/                     # Pages, layouts, API routes, SEO and UX states
-│   ├── api/                 # Backend route handlers
-│   ├── auth/                # Sign-in and sign-out experiences
-│   ├── student/             # Profile, matches, job details, applications
-│   └── recruiter/           # Dashboard, listings, applicants
-├── components/              # Shared product and UI components
-├── lib/                     # Auth, database, storage, site configuration
-└── modules/
-    ├── applications/        # Application model and service
-    ├── listings/            # Listing model and service
-    ├── matching/            # Score engine, service, model, tests
-    ├── profile/             # Student profile model and service
-    ├── resume/              # Validation, extraction, OCR, Groq analysis
-    └── user/                # User model
+```
+1. Landing page     → Introduce CredX as explainable matching, not a job filter
+2. Sign in          → Authenticate with Google
+3. Build profile    → Add skills, GPA, location, work auth; optionally upload resume
+4. View matches     → Show ranked roles; explain one score using its breakdown
+5. Use filters      → Narrow by work mode, location, or sponsorship
+6. Apply            → Submit an application; open the student tracker
+7. Recruiter view   → Create/open a listing; review matched applicant; update status
+8. Student tracker  → Show updated status — end-to-end loop complete ✓
 ```
 
-## Design and reliability details
+---
 
-- Responsive student and recruiter experiences with reusable visual primitives.
-- Loading skeletons, empty states, global error recovery, and a branded 404 page.
-- Keyboard skip navigation, semantic landmarks, live status announcements, and reduced-motion support.
-- File-size, MIME type, extension, and binary-signature validation for resume uploads.
-- Server-side authentication and role-aware route access.
-- SEO metadata, Open Graph data, JSON-LD, sitemap, robots policy, and PWA manifest.
-- Deterministic matching tests covering boundaries and invariants.
+## 📊 Project Presentation
 
-## Project presentation
+For a visual walkthrough of the problem, product, algorithm, architecture, and both user experiences:
 
-For a visual explanation of the problem, product journey, matching algorithm, system architecture, student experience, and recruiter workflow, open the complete CredX presentation:
+<div align="center">
 
-### **[View the presentation online →](https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fraw.githubusercontent.com%2FEren2yeager%2FCredX-SmartJobMatchingDash%2Fmaster%2Foutput%2FCredX_Project_Presentation.pptx)**
+### **[📽️ View Presentation Online →](https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fraw.githubusercontent.com%2FEren2yeager%2FCredX-SmartJobMatchingDash%2Fmaster%2Foutput%2FCredX_Project_Presentation.pptx)**
 
-[Open the PowerPoint on GitHub](https://github.com/Eren2yeager/CredX-SmartJobMatchingDash/blob/master/output/CredX_Project_Presentation.pptx) · [Download the original `.pptx`](output/CredX_Project_Presentation.pptx?raw=1)
+[Open on GitHub](https://github.com/Eren2yeager/CredX-SmartJobMatchingDash/blob/master/output/CredX_Project_Presentation.pptx) · [Download .pptx](output/CredX_Project_Presentation.pptx?raw=1)
 
-> GitHub does not display PowerPoint slides directly in every browser. Use **View the presentation online** for an in-browser slideshow, or download the original file from GitHub.
+> GitHub doesn't render PowerPoint in every browser. Use **View Online** for an in-browser slideshow.
 
-## Explore the working product
+</div>
 
-The live application is the most reliable way to evaluate the complete experience, from authentication and profile creation to explainable matching and application tracking:
+---
 
-**[Open the deployed CredX application →](https://cred-x-smart-job-matching-dash.vercel.app/)**
+## 🔒 Reliability & Quality Details
+
+- ⚡ Responsive student and recruiter UX with reusable visual primitives
+- 🦴 Loading skeletons, empty states, global error recovery, branded 404
+- ♿ Keyboard skip navigation, semantic landmarks, live status announcements, reduced-motion support
+- 🛡️ File-size, MIME type, extension, and binary-signature validation for uploads
+- 🔐 Server-side authentication and role-aware route access
+- 🌐 SEO metadata, Open Graph, JSON-LD, sitemap, robots policy, PWA manifest
+- 🧪 Deterministic matching tests covering boundaries and invariants
 
 ---
 
 <div align="center">
-  <strong>CredX</strong><br />
-  Explainable matching that helps students act with confidence and recruiters find stronger signals.
+
+<img src="public/brand/credx-mark.png" alt="CredX" width="48" />
+
+**CredX** — Explainable matching that helps students act with confidence and recruiters find stronger signals.
+
+[![Live App](https://img.shields.io/badge/▶%20Open%20Live%20App-E4512F?style=for-the-badge&logoColor=white)](https://cred-x-smart-job-matching-dash.vercel.app/)
+
 </div>
-#   C r e d X - S m a r t J o b M a t c h i n g D a s h - m a s t e r  
- 
